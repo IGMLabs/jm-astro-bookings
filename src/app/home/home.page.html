@@ -1,30 +1,3 @@
-<article>
-  <h3> Working with {{ getAgenciesLength() }} agencies</h3>
-  <ul>
-    <li *ngFor="let agency of agencies">
-      <span [ngClass]="agency.status|lowercase">{{ agency.name }}</span>
-      <ng-container *ngIf="agency.range === 'Interplanetary' then interplanetary; else orbital">
-      </ng-container>
-      <ng-template #interplanetary> ⭐ </ng-template>
-      <ng-template #orbital> 🌎 </ng-template>
+<app-agencies-list></app-agencies-list>
+<app-trips-list></app-trips-list>
 
-      <!-- <span *ngIf="agency.range === 'Interplanetary'"> ⭐ </span>
-      <span *ngIf="agency.range === 'Orbital'"> 🌍 </span> -->
-    </li>
-  </ul>
-  <button (click)="reload('agencies')"> ♻ </button>
-</article>
-<article>
-  <h3> Number of trips: {{ getTripsLength() }}</h3>
-  <ul>
-    <li *ngFor="let trip of trips">
-      <span [ngClass]="getClassForStatus(trip.status)">{{ trip.destination }}</span>
-      <ng-container *ngIf="trip.kind === 'WithStay' then withstay; else triponly">
-      </ng-container>
-      <ng-template #withstay> 🛏 </ng-template>
-      <ng-template #triponly> 🛩 </ng-template>
-    </li>
-  </ul>
-  <button (click)="reload('trips')"> ♻ </button>
-</article>
-<app-reloading *ngIf="reloading"></app-reloading>

@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'auth/login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
   { path: 'agencies', loadChildren: () => import('./agencies/agencies.module').then(m => m.AgenciesModule) },
   { path: 'agencies', loadChildren: () => import('./agencies/agencies.module').then(m => m.AgenciesModule) },
+  { path: 'trips', loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule) },
 
 ];
 
