@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReloadingComponent } from './reloading/reloading.component';
 import { AgenciesList } from './components/agencies/agencies.list';
 import { TripsList } from './components/trips/trips.list';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,12 +14,14 @@ import { TripsList } from './components/trips/trips.list';
     TripsList
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     ReloadingComponent,
     AgenciesList,
-    TripsList
+    TripsList,
+    RouterModule
   ]
 })
 export class SharedModule { }
