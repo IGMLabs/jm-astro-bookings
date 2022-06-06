@@ -1,43 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
-@Component({
-  selector: 'app-register-form',
-  templateUrl: './register.form.html',
-  styleUrls: ['./register.form.css']
-})
-export class RegisterForm implements OnInit {
 
+@Component({
+  selector: 'app-login-form',
+  templateUrl: './login.form.html',
+  styleUrls: ['./login.form.css']
+})
+export class LoginForm implements OnInit {
 
   public form: FormGroup;
 
   constructor(formBuilder: FormBuilder) {
     this.form = formBuilder.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
-      acceptTerms: new FormControl(false, [Validators.requiredTrue]),
-    }, {
-      validators: [this.passwordMatch]
     });
   }
 
-  private passwordMatch(form: AbstractControl) : ValidationErrors | null {
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-    if (!password || !confirmPassword) {
-      return {
-        passwordMarch: 'No passwords provided'
-      };
-    }
-    if (password.value !== confirmPassword.value){
-      return {
-        passwordMarch: "Passwords don't mactch"
-      };
-    }
-    return null;
-  }
 
   public hasError(controlName: string):boolean {
     const control = this.getControl(controlName);
@@ -68,21 +48,14 @@ export class RegisterForm implements OnInit {
     return errorMessage;
   }
 
-  public getPasswordMatchMessage() {
-    const errors = this.form.errors;
-    if (!errors) return '';
-    if (errors['passowrdMatch']) return errors['passwordMatch'];
-    return;
-  }
-
   public onSave() {
-    const {name, email, password} = this.form.value;
-    const register = {name, email, password};
-    console.warn('Send Register', register);
+    const {email, password} = this.form.value;
+    const login = {email, password};
+    console.warn('Send Login', login);
   }
 
 
   ngOnInit(): void {
   }
-}
 
+}

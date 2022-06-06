@@ -38,15 +38,17 @@
            placeholder="Confirm password"
            [attr.aria-invalid] = "hasError('confirmPassword')">
            <small *ngIf="mustShowMessage('confirmPassword')">{{getErrorMessage('confirmPassword')}}</small>
+           <small>{{getPasswordMatchMessage()}}</small>
   </div>
   <div>
     <input type="checkbox"
-    id="acceptTerms"
-    name="acceptTerms"
-    formControlName = "acceptTerms"
-    [attr.aria-invalid] = "hasError('acceptTerms')">
+          id="acceptTerms"
+          name="acceptTerms"
+          formControlName = "acceptTerms"
+          [attr.aria-invalid] = "hasError('acceptTerms')">
     <label for="acceptTerms">Accept Terms<small *ngIf="hasError('acceptTerms')">⭕</small></label>
     <small *ngIf="mustShowMessage('acceptTerms')">{{getErrorMessage('acceptTerms')}}</small>
   </div>
+  <pre>{{form.errors | json}}</pre>
   <button [disabled]="form.invalid" (click)="onSave()">Save</button>
 </form>
