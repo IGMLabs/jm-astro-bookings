@@ -1,18 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-interface Contact {
-  name: string;
-  email: string;
-  message: string;
-}
-
 @Component({
-  selector: 'app-contact-form',
-  templateUrl: './contact.form.html',
-  styleUrls: ['./contact.form.css']
+  selector: 'app-register-form',
+  templateUrl: './register.form.html',
+  styleUrls: ['./register.form.css']
 })
-export class ContactForm implements OnInit {
+export class RegisterForm implements OnInit {
+
 
   public form: FormGroup;
 
@@ -20,7 +15,9 @@ export class ContactForm implements OnInit {
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      message: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(50)])
+      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
+      acceptTerms: new FormControl(false, [Validators.requiredTrue]),
     });
   }
 
