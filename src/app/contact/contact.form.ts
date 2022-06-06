@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+interface Contact {
+  name: string;
+  email: string;
+  message: string;
+}
 
 @Component({
   selector: 'app-contact-form',
@@ -7,9 +14,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactForm implements OnInit {
 
-  constructor() { }
+  public form: FormGroup;
+
+  constructor(formBuilder: FormBuilder) {
+    this.form = formBuilder.group({
+      name: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
   }
 
+  public onSave() {
+    const contact = this.form.value;
+    console.warn('Send contact message', contact);
+  }
 }
