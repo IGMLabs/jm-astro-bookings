@@ -59,6 +59,18 @@ export class NewAgencyForm implements OnInit {
     console.warn('Send agency data ', this.form.value);
   }
 
+  public onSubmitClick(){
+    const {name, range, status} = this.form.value;
+    const id = this.getDashId(name);
+    const newAgencyData = { id, name, range, status};
+    console.warn('Send agency data ', newAgencyData)
+  }
+
+  private getDashId(str : string):string {
+    return str.toLocaleLowerCase().replace(/ /g, '-');
+
+  }
+
   private getControl(controlName: string): AbstractControl | null {
     return this.form.get(controlName);
   }

@@ -28,12 +28,12 @@ export class RegisterForm implements OnInit {
     const confirmPassword = form.get('confirmPassword');
     if (!password || !confirmPassword) {
       return {
-        passwordMarch: 'No passwords provided'
+        passwordMatch: 'No passwords provided'
       };
     }
     if (password.value !== confirmPassword.value){
       return {
-        passwordMarch: "Passwords don't mactch"
+        passwordMatch: "Passwords don't mactch"
       };
     }
     return null;
