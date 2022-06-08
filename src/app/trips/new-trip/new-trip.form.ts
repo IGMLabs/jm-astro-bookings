@@ -10,6 +10,7 @@ import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
 import { FormBase } from 'src/app/core/forms/form.base';
 import { Agency } from 'src/app/core/api/agency.interface';
+import { AgenciesApi } from 'src/app/core/api/agencies.api';
 
 @Component({
   selector: 'app-new-trip-form',
@@ -17,29 +18,17 @@ import { Agency } from 'src/app/core/api/agency.interface';
   styleUrls: ['./new-trip.form.css']
 })
 export class NewTripForm extends FormBase implements OnInit {
-  public agencies: Agency[] = [
-    {
-      id: 'space-y',
-      name: 'Space Y',
-      range: 'Interplanetary',
-      status: 'Active',
-    },
-    {
-      id: 'green-origin',
-      name: 'Green Origin',
-      range: 'Orbital',
-      status: 'Active',
-    },
-    {
-      id: 'virgin-way',
-      name: 'Virgin Way',
-      range: 'Orbital',
-      status: 'Pending',
-    },
-  ];
+  public agencies: Agency[];
 
-  constructor(formBuilder: FormBuilder, fvs: FormValidationsService, fms: FormMessagesService, public us: UtilitiesService) {
+  constructor(
+    formBuilder: FormBuilder,
+    fvs: FormValidationsService,
+    fms: FormMessagesService,
+    private us: UtilitiesService,
+    agenciesApi: AgenciesApi
+    ) {
     super(fms);
+    this.agencies = agenciesApi.getAll();
     this.form = formBuilder.group({
       agency: new FormControl('', [Validators.required]),
       destination: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)] ),

@@ -9,6 +9,9 @@ import { UtilitiesService } from 'src/app/core/utils/utilities.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormBase } from 'src/app/core/forms/form.base';
 import { IdName } from 'src/app/core/api/id-name.interface';
+import { IdNameApi } from 'src/app/core/api/id-name.api';
+import { AgenciesApi } from 'src/app/core/api/agencies.api';
+import { Agency } from 'src/app/core/api/agency.interface';
 
 @Component({
   selector: 'app-new-agency-form',
@@ -16,18 +19,13 @@ import { IdName } from 'src/app/core/api/id-name.interface';
   styleUrls: ['./new-agency.form.css'],
 })
 export class NewAgencyForm extends FormBase implements OnInit {
-  public ranges: IdName[] = [
-    { id: 'Orbital', name: '🌎 Orbiting around the earth' },
-    {
-      id: 'Interplanetary',
-      name: '🌕 To the moon and other planets',
-    },
-    { id: 'Interstellar', name: '💫 Traveling to other stars' },
-  ];
-  public statuses = ['Active', 'Pending'];
+  public ranges: IdName[]
+  public statuses;
 
-  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService) {
+  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService, private idName: IdNameApi, private agenciesApi: AgenciesApi) {
     super(fms);
+    this.ranges = idName.getRanges();
+    this.statuses = idName.getStatuses();
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       range: new FormControl('', [Validators.required]),
@@ -41,6 +39,7 @@ export class NewAgencyForm extends FormBase implements OnInit {
     const id = this.us.getDashId(name);
     const newAgencyData = { id, name, range, status};
     console.warn('Send agency data ', newAgencyData)
+    this.agenciesApi.post(newAgencyData);
   }
 
   ngOnInit(): void {}
