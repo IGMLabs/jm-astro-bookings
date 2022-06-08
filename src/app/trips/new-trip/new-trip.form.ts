@@ -5,18 +5,18 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { UtilitiesService } from 'src/app/core/common/utilities.service';
+import { UtilitiesService } from 'src/app/core/utils/utilities.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
+import { FormBase } from 'src/app/core/forms/form.base';
 
 @Component({
   selector: 'app-new-trip-form',
   templateUrl: './new-trip.form.html',
   styleUrls: ['./new-trip.form.css']
 })
-export class NewTripForm implements OnInit {
+export class NewTripForm extends FormBase implements OnInit {
   public start_date = 0;
-  public form: FormGroup;
   public agencies = [
     {
       id: 'space-y',
@@ -38,7 +38,8 @@ export class NewTripForm implements OnInit {
     },
   ];
 
-  constructor(formBuilder: FormBuilder, fvs: FormValidationsService, public fms: FormMessagesService, public us: UtilitiesService) {
+  constructor(formBuilder: FormBuilder, fvs: FormValidationsService, fms: FormMessagesService, public us: UtilitiesService) {
+    super(fms);
     this.form = formBuilder.group({
       agency: new FormControl('', [Validators.required]),
       destination: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)] ),
@@ -50,22 +51,6 @@ export class NewTripForm implements OnInit {
     }, {
       validators: [fvs.compareDates]
     });
-  }
-
-  public getDatesMessage() {
-    return this.fms.getDatesMessage(this.form);
-  }
-
-  public hasError(controlName: string): boolean {
-    return this.fms.hasError(this.form, controlName);
-  }
-
-  public mustShowMessage(controlName: string): boolean {
-    return this.fms.mustShowMessage(this.form, controlName);
-  }
-
-  public getErrorMessage(controlName: string): string {
-    return this.fms.getErrorMessage(this.form, controlName);
   }
 
   public onSubmitClick(){

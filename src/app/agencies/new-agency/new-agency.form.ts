@@ -5,16 +5,16 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { UtilitiesService } from 'src/app/core/common/utilities.service';
+import { UtilitiesService } from 'src/app/core/utils/utilities.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
+import { FormBase } from 'src/app/core/forms/form.base';
 
 @Component({
   selector: 'app-new-agency-form',
   templateUrl: './new-agency.form.html',
   styleUrls: ['./new-agency.form.css'],
 })
-export class NewAgencyForm implements OnInit {
-  public form: FormGroup;
+export class NewAgencyForm extends FormBase implements OnInit {
   public ranges = [
     { id: 'Orbital', name: '🌎 Orbiting around the earth' },
     {
@@ -25,24 +25,15 @@ export class NewAgencyForm implements OnInit {
   ];
   public statuses = ['Active', 'Pending'];
 
-  constructor(formBuilder: FormBuilder, public fms: FormMessagesService, public us: UtilitiesService) {
+  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService) {
+    super(fms);
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       range: new FormControl('', [Validators.required]),
       status: new FormControl(this.statuses[0]),
     });
   }
-  public hasError(controlName: string): boolean {
-    return this.fms.hasError(this.form, controlName);
-  }
 
-  public mustShowMessage(controlName: string): boolean {
-    return this.fms.mustShowMessage(this.form, controlName);
-  }
-
-  public getErrorMessage(controlName: string): string {
-    return this.fms.getErrorMessage(this.form, controlName);
-  }
 
   public onSubmitClick(){
     const {name, range, status} = this.form.value;
