@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UtilitiesService } from '../core/common/utilities.service';
 import { FormMessagesService } from '../core/forms/form-messages.service';
 
 interface Contact {

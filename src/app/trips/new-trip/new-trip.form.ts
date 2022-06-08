@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -75,7 +74,7 @@ export class NewTripForm implements OnInit {
     const newTripData = {id, agency, destination, places, start_date, end_date, flightPrice};
     console.warn('Send trip data ', newTripData)
   }
-  
+
   ngOnInit(): void {}
 }
 
