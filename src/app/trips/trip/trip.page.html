@@ -1,6 +1,2 @@
-<article>
-  <header>
-     <strong>{{ tripId }}</strong>
-  </header>
-  <pre>{{trip | json}}</pre>
-</article>
+<app-trip-view  [tripId]="tripId"
+                [trip]="trip"></app-trip-view>

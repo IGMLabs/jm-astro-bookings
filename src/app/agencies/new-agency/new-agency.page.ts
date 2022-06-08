@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AgenciesApi } from 'src/app/core/api/agencies.api';
 import { Agency } from 'src/app/core/api/agency.interface';
 import { IdNameApi } from 'src/app/core/api/id-name.api';
@@ -15,7 +16,7 @@ export class NewAgencyPage implements OnInit {
   public ranges: IdName[];
   public statuses;
 
-  constructor(idName: IdNameApi, private agenciesApi: AgenciesApi) {
+  constructor(idName: IdNameApi, private agenciesApi: AgenciesApi, private router: Router) {
     this.ranges = idName.getRanges();
     this.statuses = idName.getStatuses();
    }
@@ -25,6 +26,8 @@ export class NewAgencyPage implements OnInit {
 
   onSave(newAgencyData: Agency){
     this.agenciesApi.post(newAgencyData);
+    this.router.navigate(['/agencies']);
+
   }
 
 }

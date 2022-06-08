@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -11,6 +11,7 @@ import { FormBase } from 'src/app/core/forms/form.base';
 import { Agency } from 'src/app/core/api/agency.interface';
 import { AgenciesApi } from 'src/app/core/api/agencies.api';
 import { TripsApi } from 'src/app/core/api/trips.api';
+import { Trip } from 'src/app/core/api/trip.interface';
 
 @Component({
   selector: 'app-new-trip-form',
@@ -18,7 +19,8 @@ import { TripsApi } from 'src/app/core/api/trips.api';
   styleUrls: ['./new-trip.form.css']
 })
 export class NewTripForm extends FormBase implements OnInit {
-  public agencies: Agency[];
+  @Input() public agencies: Agency[] = [];
+  @Output() public save = new EventEmitter<Trip>();
 
   constructor(
     formBuilder: FormBuilder,
@@ -48,7 +50,7 @@ export class NewTripForm extends FormBase implements OnInit {
     const id = this.us.getDashId(agencyId + "-" + destination);
     const newTripData = {id, agencyId, destination, places, startDate, endDate, flightPrice};
     console.warn('Send trip data ', newTripData);
-    this.tripsApi.post(newTripData);
+    this.save.emit(newTripData);
 
   }
 

@@ -4,7 +4,6 @@ import { AgenciesApi } from 'src/app/core/api/agencies.api';
 import { Agency } from 'src/app/core/api/agency.interface';
 
 @Component({
-  selector: 'app-agency',
   templateUrl: './agency.page.html',
   styleUrls: ['./agency.page.css']
 })

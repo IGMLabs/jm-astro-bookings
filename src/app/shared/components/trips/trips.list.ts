@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Trip } from 'src/app/core/api/trip.interface';
 import { TripsApi } from 'src/app/core/api/trips.api';
 
@@ -9,12 +9,9 @@ import { TripsApi } from 'src/app/core/api/trips.api';
 })
 export class TripsList implements OnInit {
 
-  public trips: Trip[]
+  @Input() public trips: Trip[] = [];
+  @Output() private reload = new EventEmitter();
 
-
-  constructor(private tripsApi: TripsApi) {
-    this.trips = tripsApi.getAll();
-  }
 
   ngOnInit(): void {
   }
@@ -24,9 +21,9 @@ export class TripsList implements OnInit {
 
   public reloading = false;
 
-  public reload(list: string){
+  public onReloadClick(list: string){
     this.reloading = true;
-    console.log("Reloading..." + list);
+    this.reload.emit()
   }
 
   public getClassForStatus(status: string | undefined){
