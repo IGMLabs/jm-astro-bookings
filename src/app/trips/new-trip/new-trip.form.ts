@@ -9,6 +9,7 @@ import { UtilitiesService } from 'src/app/core/utils/utilities.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
 import { FormBase } from 'src/app/core/forms/form.base';
+import { Agency } from 'src/app/core/api/agency.interface';
 
 @Component({
   selector: 'app-new-trip-form',
@@ -16,8 +17,7 @@ import { FormBase } from 'src/app/core/forms/form.base';
   styleUrls: ['./new-trip.form.css']
 })
 export class NewTripForm extends FormBase implements OnInit {
-  public start_date = 0;
-  public agencies = [
+  public agencies: Agency[] = [
     {
       id: 'space-y',
       name: 'Space Y',

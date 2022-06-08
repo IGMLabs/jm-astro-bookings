@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Agency } from 'src/app/core/api/agency.interface';
 
 @Component({
   selector: 'app-agencies-list',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgenciesList implements OnInit {
 
-  public agencies = [
+  public agencies: Agency[] = [
     {
       id: 'space-y',
       name: 'Space Y',

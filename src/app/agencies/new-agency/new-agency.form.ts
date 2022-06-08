@@ -8,6 +8,7 @@ import {
 import { UtilitiesService } from 'src/app/core/utils/utilities.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormBase } from 'src/app/core/forms/form.base';
+import { IdName } from 'src/app/core/api/id-name.interface';
 
 @Component({
   selector: 'app-new-agency-form',
@@ -15,11 +16,11 @@ import { FormBase } from 'src/app/core/forms/form.base';
   styleUrls: ['./new-agency.form.css'],
 })
 export class NewAgencyForm extends FormBase implements OnInit {
-  public ranges = [
+  public ranges: IdName[] = [
     { id: 'Orbital', name: '🌎 Orbiting around the earth' },
     {
       id: 'Interplanetary',
-      name: '🌕 To the moon and other plantes',
+      name: '🌕 To the moon and other planets',
     },
     { id: 'Interstellar', name: '💫 Traveling to other stars' },
   ];
