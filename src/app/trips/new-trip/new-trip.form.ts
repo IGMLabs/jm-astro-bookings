@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
-  FormGroup,
   Validators,
 } from '@angular/forms';
 import { UtilitiesService } from 'src/app/core/utils/utilities.service';
@@ -11,6 +10,7 @@ import { FormValidationsService } from 'src/app/core/forms/form-validations.serv
 import { FormBase } from 'src/app/core/forms/form.base';
 import { Agency } from 'src/app/core/api/agency.interface';
 import { AgenciesApi } from 'src/app/core/api/agencies.api';
+import { TripsApi } from 'src/app/core/api/trips.api';
 
 @Component({
   selector: 'app-new-trip-form',
@@ -25,16 +25,17 @@ export class NewTripForm extends FormBase implements OnInit {
     fvs: FormValidationsService,
     fms: FormMessagesService,
     private us: UtilitiesService,
-    agenciesApi: AgenciesApi
+    agenciesApi: AgenciesApi,
+    private tripsApi: TripsApi
     ) {
     super(fms);
     this.agencies = agenciesApi.getAll();
     this.form = formBuilder.group({
-      agency: new FormControl('', [Validators.required]),
+      agencyId: new FormControl('', [Validators.required]),
       destination: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)] ),
       places: new FormControl('', [Validators.required, Validators.min(2), Validators.max(10)] ),
-      start_date: new FormControl('', [Validators.required] ),
-      end_date: new FormControl('', [Validators.required] ),
+      startDate: new FormControl('', [Validators.required] ),
+      endDate: new FormControl('', [Validators.required] ),
       flightPrice: new FormControl('', [Validators.required, Validators.min(1000000), Validators.max(10000000)] ),
 
     }, {
@@ -43,10 +44,12 @@ export class NewTripForm extends FormBase implements OnInit {
   }
 
   public onSubmitClick(){
-    const {agency, destination, places, start_date, end_date, flightPrice} = this.form.value;
-    const id = this.us.getDashId(agency + "-" + destination);
-    const newTripData = {id, agency, destination, places, start_date, end_date, flightPrice};
-    console.warn('Send trip data ', newTripData)
+    const {agencyId, destination, places, startDate, endDate, flightPrice} = this.form.value;
+    const id = this.us.getDashId(agencyId + "-" + destination);
+    const newTripData = {id, agencyId, destination, places, startDate, endDate, flightPrice};
+    console.warn('Send trip data ', newTripData);
+    this.tripsApi.post(newTripData);
+
   }
 
   ngOnInit(): void {}

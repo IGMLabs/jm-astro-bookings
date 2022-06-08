@@ -2,9 +2,9 @@
   <div>
     <fieldset>
       <div>
-        <label for="agency"> Agency</label>
-        <select name="agency"
-                formControlName="agency">
+        <label for="agencyId"> Agency</label>
+        <select name="agencyId"
+                formControlName="agencyId">
           <option value="">Select an agency</option>
           <option *ngFor="let agency of agencies"
                   [value]="agency.id">{{ agency.name }}</option>
@@ -28,20 +28,20 @@
         <small *ngIf="mustShowMessage('places')">{{ getErrorMessage('places') }}</small>
       </div>
       <div>
-        <label for="start_date"> Start Date</label>
-        <input name="start_date"
+        <label for="startDate"> Start Date</label>
+        <input name="startDate"
               type="date"
-              formControlName="start_date"
-              [attr.aria-invalid]="hasError('start_date')">
-        <small *ngIf="mustShowMessage('start_date')">{{ getErrorMessage('start_date') }}</small>
+              formControlName="startDate"
+              [attr.aria-invalid]="hasError('startDate')">
+        <small *ngIf="mustShowMessage('startDate')">{{ getErrorMessage('startDate') }}</small>
       </div>
       <div>
-        <label for="end_date"> End Date</label>
-        <input name="end_date"
+        <label for="endDate"> End Date</label>
+        <input name="endDate"
               type="date"
-              formControlName="end_date"
-              [attr.aria-invalid]="hasError('end_date')">
-        <small *ngIf="mustShowMessage('end_date')">{{ getErrorMessage('end_date') }}</small>
+              formControlName="endDate"
+              [attr.aria-invalid]="hasError('endDate')">
+        <small *ngIf="mustShowMessage('endDate')">{{ getErrorMessage('endDate') }}</small>
         <small>{{getDatesMessage()}}</small>
       </div>
       <div>
