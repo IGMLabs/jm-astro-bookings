@@ -12,6 +12,6 @@
       <span *ngIf="agency.range === 'Orbital'"> 🌍 </span> -->
     </li>
   </ul>
-  <button (click)="reload('agencies')"> ♻ </button>
+  <button (click)="onReloadClick('agencies')"> ♻ </button>
 </article>
 <app-reloading *ngIf="reloading"></app-reloading>

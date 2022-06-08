@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AgenciesApi } from 'src/app/core/api/agencies.api';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Agency } from 'src/app/core/api/agency.interface';
 
 @Component({
@@ -9,13 +8,11 @@ import { Agency } from 'src/app/core/api/agency.interface';
 })
 export class AgenciesList implements OnInit {
 
-  public agencies: Agency[]
+  @Input() public agencies: Agency[] = [];
+  @Output() private reload = new EventEmitter();
 
   public reloading = false;
 
-  constructor(private agenciesApi: AgenciesApi) {
-    this.agencies = agenciesApi.getAll();
-  }
 
   ngOnInit(): void {
   }
@@ -24,9 +21,9 @@ export class AgenciesList implements OnInit {
     return this.agencies.length;
   }
 
-  public reload(list: string){
+  public onReloadClick(list: string){
     this.reloading = true;
-    console.log("Reloading..." + list);
+    this.reload.emit();
   }
 
 

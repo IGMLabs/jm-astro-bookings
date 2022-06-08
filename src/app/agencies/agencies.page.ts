@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AgenciesApi } from '../core/api/agencies.api';
+import { Agency } from '../core/api/agency.interface';
 
 @Component({
   selector: 'app-agencies',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgenciesPage implements OnInit {
 
-  constructor() { }
+  public agencies!: Agency[];
+
+  constructor(private agenciesApi: AgenciesApi) {
+    this.agencies = this.agenciesApi.getAll();
+  }
 
   ngOnInit(): void {
+  }
+
+  onReload(){
+    this.agencies = this.agenciesApi.getAll();
   }
 
 }

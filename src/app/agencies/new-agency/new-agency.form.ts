@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
-  FormGroup,
   Validators,
 } from '@angular/forms';
 import { UtilitiesService } from 'src/app/core/utils/utilities.service';
@@ -19,13 +18,12 @@ import { Agency } from 'src/app/core/api/agency.interface';
   styleUrls: ['./new-agency.form.css'],
 })
 export class NewAgencyForm extends FormBase implements OnInit {
-  public ranges: IdName[]
-  public statuses;
+  @Input() public ranges: IdName[] = [];
+  @Input() public statuses: string[] = [];
+  @Output() public save = new EventEmitter<Agency>();
 
-  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService, private idName: IdNameApi, private agenciesApi: AgenciesApi) {
+  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService, idName: IdNameApi, private agenciesApi: AgenciesApi) {
     super(fms);
-    this.ranges = idName.getRanges();
-    this.statuses = idName.getStatuses();
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       range: new FormControl('', [Validators.required]),
@@ -39,7 +37,7 @@ export class NewAgencyForm extends FormBase implements OnInit {
     const id = this.us.getDashId(name);
     const newAgencyData = { id, name, range, status};
     console.warn('Send agency data ', newAgencyData)
-    this.agenciesApi.post(newAgencyData);
+    this.save.emit(newAgencyData);
   }
 
   ngOnInit(): void {}

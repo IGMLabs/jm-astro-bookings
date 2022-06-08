@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AgenciesApi } from 'src/app/core/api/agencies.api';
+import { Agency } from 'src/app/core/api/agency.interface';
+import { IdNameApi } from 'src/app/core/api/id-name.api';
+import { IdName } from 'src/app/core/api/id-name.interface';
+
 
 @Component({
   selector: 'app-new-agency',
@@ -7,9 +12,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewAgencyPage implements OnInit {
 
-  constructor() { }
+  public ranges: IdName[];
+  public statuses;
+
+  constructor(idName: IdNameApi, private agenciesApi: AgenciesApi) {
+    this.ranges = idName.getRanges();
+    this.statuses = idName.getStatuses();
+   }
 
   ngOnInit(): void {
+  }
+
+  onSave(newAgencyData: Agency){
+    this.agenciesApi.post(newAgencyData);
   }
 
 }
