@@ -11,14 +11,8 @@ import { TripsApi } from '../core/api/trips.api';
 })
 export class HomePage implements OnInit {
 
-  public title = 'Astro Bookings';
-  public subtitle = 'Welcome on board';
-  public author = 'Juan Moure';
-  public authorUrl = 'http://spadejj.com';
   public trips!: Trip[];
   public agencies!: Agency[];
-
-
 
   public reloading = false;
 

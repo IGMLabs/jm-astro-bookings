@@ -12,7 +12,7 @@ export class AgencyPage implements OnInit {
   public agencyId : string;
   public agency?: Agency;
 
-  constructor(route: ActivatedRoute, private agenciesApi: AgenciesApi) {
+  constructor(route: ActivatedRoute, agenciesApi: AgenciesApi) {
     this.agencyId = route.snapshot.paramMap.get('id') || '';
     this.agency = agenciesApi.getById(this.agencyId);
   }
