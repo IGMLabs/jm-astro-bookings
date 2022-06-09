@@ -15,7 +15,7 @@ export class NewTripPage implements OnInit {
   public agencies: Agency[] = [];
 
   constructor(agenciesApi: AgenciesApi, private tripsApi: TripsApi, private router: Router) {
-    agenciesApi.getAll().subscribe((data) => {
+    agenciesApi.getAll$().subscribe((data) => {
       this.agencies = data;
     })
   }
