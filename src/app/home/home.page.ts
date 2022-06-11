@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
 
   public reloading = false;
 
-  constructor(tripsApi: TripsApi, agenciesApi: AgenciesApi) {
+  constructor(tripsApi: TripsApi, private agenciesApi: AgenciesApi) {
     this.trips$ = tripsApi.getAll$();
     this.agencies$ = agenciesApi.getAll$();
    }
@@ -25,4 +25,7 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
   }
 
+  onReload(){
+    this.agencies$ = this.agenciesApi.getAll$();
+  }
 }

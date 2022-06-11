@@ -1,26 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { CrudApi } from './crud.api';
 import { Trip } from './trip.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TripsApi {
-
-  constructor(private http: HttpClient){
-
+export class TripsApi extends CrudApi<Trip>{
+  constructor(http: HttpClient){
+    super(http, 'trips');
   }
 
-  public getAll$(): Observable<Trip[]>{
-    return this.http.get<Trip[]>('http://localhost:3000/trips');
-  }
 
-  public getById$(id: string): Observable<Trip>{
-    return this.http.get<Trip>('http://localhost:3000/trips/' + id);
-  }
-
-  public post$(trip: Trip) {
-    return this.http.post('http://localhost:3000/trips', trip);
-  }
 }
