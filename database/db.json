@@ -19,6 +19,12 @@
       "name": "Virgin Way",
       "range": "Orbital",
       "status": "Pending"
+    },
+    {
+      "id": "chantadanasa",
+      "name": "ChantadaNasa",
+      "range": "Orbital",
+      "status": "Active"
     }
   ],
   "trips": [
@@ -81,6 +87,15 @@
       "status": "Waiting",
       "extraLuggagePricePerKilo": 0,
       "premiumFoodPrice": 1000
+    },
+    {
+      "id": "chantadanasa-luna",
+      "agencyId": "chantadanasa",
+      "destination": "Luna",
+      "places": 10,
+      "startDate": "2022-08-20",
+      "endDate": "2023-09-09",
+      "flightPrice": 1000000
     }
   ]
 }

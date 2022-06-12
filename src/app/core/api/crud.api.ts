@@ -1,31 +1,58 @@
 import { HttpClient } from '@angular/common/http';
-import { environment } from "src/environments/environment";
-import { Observable } from "rxjs";
+import { catchError, of, pipe, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { StatusStore } from './status.store';
 
+export abstract class CrudApi<ApiType> {
+  private url = environment.apiUrl + this.endPoint + '/';
 
-export abstract class CrudApi<T> {
+  private statusPipe = pipe(
+    tap(() => this.notifyIdle()),
+    catchError((err) => {
+      this.notifyError(err.message);
+      return of(err);
+    })
+  );
 
-  private url = environment.apiUrl + this.endPoint + "/";
+  constructor(
+    private http: HttpClient,
+    private endPoint: string,
+    protected statusStore: StatusStore
+  ) {}
 
-  constructor(private http: HttpClient, private endPoint: string){  }
-
-  public getAll$(): Observable<T[]>{
-    return this.http.get<T[]>(this.url);
+  public getAll$() {
+    this.notifyWorking();
+    return this.http.get<ApiType[]>(this.url).pipe(this.statusPipe);
   }
 
-  public getById$(id: string): Observable<T>{
-    return this.http.get<T>(this.url + id);
+  public getById$(id: string) {
+    this.notifyWorking();
+    return this.http.get<ApiType>(this.url + id).pipe(this.statusPipe);
   }
 
-  public post$(payload: Partial<T>) {
-    return this.http.post<T>(this.url, payload);
+  public post$(payload: Partial<ApiType>) {
+    this.notifyWorking();
+    return this.http.post<ApiType>(this.url, payload).pipe(this.statusPipe);
   }
 
-  public put$(id: string, payload: Partial<T>){
-    return this.http.put<T>(this.url + id, payload);
+  public put$(id: string, payload: Partial<ApiType>) {
+    this.notifyWorking();
+    return this.http.put<ApiType>(this.url + id, payload).pipe(this.statusPipe);
   }
 
-  public delete(id:string){
-    return this.http.delete<T>(this.url + id);
+  public delete$(id: string) {
+    this.notifyWorking();
+    return this.http.delete<ApiType>(this.url + id).pipe(this.statusPipe);
+  }
+
+  private notifyWorking() {
+    this.statusStore.setState({ isWorking: true, errorMessage: '' });
+  }
+  private notifyIdle() {
+    this.statusStore.setState({ isWorking: false, errorMessage: '' });
+  }
+  private notifyError(message: string) {
+    console.warn({ isWorking: false, errorMessage: message });
+    this.statusStore.setState({ isWorking: false, errorMessage: message });
   }
 }
