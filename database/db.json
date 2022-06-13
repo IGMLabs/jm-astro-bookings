@@ -1,6 +1,15 @@
 {
   "users": [],
-  "bookings": [],
+  "bookings": [
+    {
+      "id": "green-origin-iss-4-juan",
+      "tripId": "green-origin-iss-4",
+      "passengerName": "Juan",
+      "date": "6/13/2022",
+      "luggageKilos": 10,
+      "hasPremiumFoodPrice": true
+    }
+  ],
   "agencies": [
     {
       "id": "space-y",
