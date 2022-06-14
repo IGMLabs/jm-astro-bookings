@@ -11,30 +11,23 @@
         </select>
         <small *ngIf="mustShowMessage('tripId')">{{ getErrorMessage('tripId') }}</small>
       </div>
-      <div>
-        <label for="passengerName"> PassengerName</label>
-        <input name="passengerName"
-              type="text"
-              formControlName="passengerName"
-              [attr.aria-invalid]="hasError('passengerName')">
-        <small *ngIf="mustShowMessage('passengerName')">{{ getErrorMessage('passengerName') }}</small>
-      </div>
-      <div>
-        <label for="luggageKilos"> Luggage Kilos</label>
-        <input name="luggageKilos"
-              type="number"
-              formControlName="luggageKilos"
-              [attr.aria-invalid]="hasError('luggageKilos')">
-        <small *ngIf="mustShowMessage('luggageKilos')">{{ getErrorMessage('luggageKilos') }}</small>
-      </div>
-      <div>
-        <label for="hasPremiumFoodPrice"> Premium Food Price</label>
-        <input name="hasPremiumFoodPrice"
-              type="checkbox"
-              formControlName="hasPremiumFoodPrice"
-              [attr.aria-invalid]="hasError('hasPremiumFoodPrice')">
-        <small *ngIf="mustShowMessage('hasPremiumFoodPrice')">{{ getErrorMessage('hasPremiumFoodPrice') }}</small>
-      </div>
+      <app-template-control [form]="form"
+                            formControlName="passengerName"
+                            label="Passenger Name"
+                            placeholder="Passenger Name">
+      </app-template-control>
+      <app-template-control [form]="form"
+                            formControlName="luggageKilos"
+                            label="Luggage Kilos"
+                            inputType="number"
+                            placeholder="">
+      </app-template-control>
+      <app-template-control [form]="form"
+                            formControlName="hasPremiumFoodPrice"
+                            label="Premium Food Price"
+                            inputType="checkbox"
+                            placeholder="">
+      </app-template-control>
     </fieldset>
   </div>
   <button [disabled]="form.invalid"

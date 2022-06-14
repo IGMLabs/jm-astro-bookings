@@ -6,6 +6,8 @@ import { TripsList } from './components/trips/trips.list';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookingsList } from './components/bookings/bookings.list';
+import { EmailControl } from './controls/email/email.control';
+import { TemplateControl } from './controls/template/template.control';
 
 
 
@@ -14,7 +16,9 @@ import { BookingsList } from './components/bookings/bookings.list';
     ReloadingComponent,
     AgenciesList,
     TripsList,
-    BookingsList
+    BookingsList,
+    EmailControl,
+    TemplateControl
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,9 @@ import { BookingsList } from './components/bookings/bookings.list';
     TripsList,
     BookingsList,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EmailControl,
+    TemplateControl
   ]
 })
 export class SharedModule { }
