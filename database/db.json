@@ -1,5 +1,17 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "juan@mail.com",
+      "password": "$2a$10$MMTphArN9D1jegtp91b3fuFgdY/xa1P1Cm0eFTDNR71LvJkYodzyS",
+      "id": 1
+    },
+    {
+      "email": "jose@mail.com",
+      "password": "$2a$10$jtwg/d1IUvlRHd465Cyl0O43hHEU3bDZwNB6p40Ak2S9eoIFmXq5e",
+      "name": "Jose",
+      "id": 2
+    }
+  ],
   "bookings": [
     {
       "id": "green-origin-iss-4-juan",

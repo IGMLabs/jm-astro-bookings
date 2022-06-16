@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Login } from 'src/app/auth/api/login.interface';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormBase } from 'src/app/core/forms/form.base';
 
@@ -12,19 +13,20 @@ import { FormBase } from 'src/app/core/forms/form.base';
 })
 export class LoginForm extends FormBase implements OnInit {
 
+  @Output() public save = new EventEmitter<Login>();
 
   constructor(formBuilder: FormBuilder, fms: FormMessagesService) {
     super(fms);
     this.form = formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
+      email: new FormControl(''),
+      password: new FormControl('', [Validators.required]),
     });
   }
 
   public onSave() {
     const {email, password} = this.form.value;
-    const login = {email, password};
-    console.warn('Send Login', login);
+    const login: Login = {email: email.email, password};
+    this.save.emit(login);
   }
 
 
