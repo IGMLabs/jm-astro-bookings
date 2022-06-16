@@ -46,6 +46,24 @@
       "name": "ChantadaNasa",
       "range": "Orbital",
       "status": "Active"
+    },
+    {
+      "id": "monfornasa",
+      "name": "MonforNasa",
+      "range": "Interstellar",
+      "status": null
+    },
+    {
+      "id": "vinasa",
+      "name": "ViNASA",
+      "range": "Orbital",
+      "status": null
+    },
+    {
+      "id": "patatanasa",
+      "name": "PatataNASA",
+      "range": "Interplanetary",
+      "status": null
     }
   ],
   "trips": [
