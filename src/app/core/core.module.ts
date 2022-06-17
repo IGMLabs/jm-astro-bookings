@@ -9,6 +9,8 @@ import { ErrorInterceptor } from './api/error.interceptor';
 import { AuthInterceptor } from '../auth/api/auth.interceptor';
 import { StorageBase } from './utils/storage.base';
 import { LocalStorage } from './utils/local-storage.service';
+import { SessionStorage } from './utils/session-storage.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -30,7 +32,10 @@ import { LocalStorage } from './utils/local-storage.service';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: StorageBase, useClass: LocalStorage },
+    { provide: StorageBase, useFactory: () => {
+      if(environment.production) return SessionStorage;
+      else return LocalStorage;
+    } },
   ]
 })
 export class CoreModule { }

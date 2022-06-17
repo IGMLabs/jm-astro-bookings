@@ -1,9 +1,11 @@
-export class SessionStorage {
+import { Storage } from "./storage.interface";
+
+export class SessionStorage implements Storage{
 
   private readonly tokenKey = 'accessToken';
 
   public getToken(): string{
-    const accessToken = localStorage.getItem(this.tokenKey);
+    const accessToken = sessionStorage.getItem(this.tokenKey);
     if(accessToken){
       return accessToken;
     }
@@ -11,6 +13,6 @@ export class SessionStorage {
   }
 
   public setToken(token: string){
-    localStorage.setItem(this.tokenKey, token)
+    sessionStorage.setItem(this.tokenKey, token)
   }
 }
