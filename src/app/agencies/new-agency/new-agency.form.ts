@@ -31,9 +31,9 @@ export class NewAgencyForm extends FormBase implements OnInit {
 
 
   public onSubmitClick(){
-    const {name, range, status} = this.form.value;
-    const id = this.us.getDashId(name);
-    const newAgencyData = { id, name, range, status};
+    let {name, range, status} = this.form.value;
+    if(status == null) status = "";
+    const newAgencyData = { name, range, status};
     console.warn('Send agency data ', newAgencyData)
     this.save.emit(newAgencyData);
   }

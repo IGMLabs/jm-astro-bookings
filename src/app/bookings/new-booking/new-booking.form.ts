@@ -26,7 +26,7 @@ constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: Util
   this.form = formBuilder.group({
     tripId: new FormControl('', [Validators.required]),
     passengerName: new FormControl('', [Validators.required]),
-    date: new FormControl(new Date().toLocaleDateString('en-US')),
+    passengers: new FormControl('', [Validators.required]),
     luggageKilos: new FormControl('', [Validators.required, Validators.min(2), Validators.max(20)]),
     hasPremiumFoodPrice: new FormControl(false),
 
@@ -34,9 +34,8 @@ constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: Util
 }
 
 public onSubmitClick() {
-  const { tripId, passengerName, date, luggageKilos, hasPremiumFoodPrice } = this.form.value;
-  const id = this.us.getDashId(tripId + "-" + passengerName);
-  const newBookingData = { id, tripId,passengerName, date, luggageKilos, hasPremiumFoodPrice };
+  const { tripId, passengerName, luggageKilos, hasPremiumFoodPrice, passengers } = this.form.value;
+  const newBookingData = { tripId ,passengerName, luggageKilos, hasPremiumFoodPrice, passengers };
 
   this.save.emit(newBookingData);
 

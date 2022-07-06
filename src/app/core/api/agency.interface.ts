@@ -1,5 +1,5 @@
 export interface Agency {
-  id: string;
+  id?: string;
   name: string;
   range: string;
   status: string;

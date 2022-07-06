@@ -30,7 +30,7 @@ export class AgenciesList implements OnInit {
     this.reload.emit();
   }
 
-  onSearchClick(agencyId: string){
+  onSearchClick(agencyId: string = ""){
     this.router.navigate([],{
       relativeTo: this.route,
       queryParams: {q: agencyId},

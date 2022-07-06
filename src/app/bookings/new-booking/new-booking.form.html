@@ -16,6 +16,13 @@
                             label="Passenger Name"
                             placeholder="Passenger Name">
       </app-template-control>
+
+      <app-template-control [form]="form"
+                            formControlName="passengers"
+                            label="Number of passengers"
+                            inputType="number"
+                            placeholder="">
+      </app-template-control>
       <app-template-control [form]="form"
                             formControlName="luggageKilos"
                             label="Luggage Kilos"

@@ -1,8 +1,8 @@
 export interface Booking{
-  id: string;
+  id?: string;
   tripId: string;
   passengerName: string;
-  date: string;
+  passengers: number;
   luggageKilos: number;
   hasPremiumFoodPrice: boolean;
 }
